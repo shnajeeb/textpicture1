@@ -16,8 +16,10 @@ def create_image_from_text(text):
     # Initialize ImageDraw
     draw = ImageDraw.Draw(image)
     
-    # Calculate text width and height to center it
-    text_width, text_height = draw.textsize(text, font=font)
+    # Calculate text width and height to center it using textbbox
+    bbox = draw.textbbox((0, 0), text, font=font)
+    text_width = bbox[2] - bbox[0]
+    text_height = bbox[3] - bbox[1]
     text_x = (width - text_width) // 2
     text_y = (height - text_height) // 2
 
